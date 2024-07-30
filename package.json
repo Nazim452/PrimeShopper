@@ -1,5 +1,5 @@
 {
-  "name": "ecommerce-app",
+  "name": "primeshopper",
   "version": "1.0.0",
   "description": "ecommerce rest api",
   "main": "server.js",
