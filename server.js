@@ -11,6 +11,7 @@ import authRoutes from  './routes/authRoute.js'
 import cors from 'cors';
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import path from 'path';
 
 //configure env
 dotenv.config();
@@ -32,7 +33,13 @@ app.use(morgan('dev'));
 app.use('/api/v1/auth',authRoutes)
 app.use('/api/v1/category',categoryRoutes)
 app.use('/api/v1/product',productRoutes)
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '../client/build')));
 
+// Handle any requests that don't match the API routes by serving the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 //rest api
 app.get('/',(req,res)=>{
